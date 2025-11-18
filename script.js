@@ -27,7 +27,6 @@ document.addEventListener("DOMContentLoaded", function() {
         <div class="bg-[#101211] p-6 sm:p-10 rounded-xl shadow-2xl relative overflow-hidden">
 
             <div id="step1" class="step-transition opacity-100">
-                
                 <div class="mb-6 p-4 bg-[#202221] rounded-lg border border-gray-700">
                     <h4 class="font-bold text-lg text-[#EDA400] mb-2">What is this calculator for?</h4>
                     <p class="text-sm text-gray-300">
@@ -59,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             Media & Acquisition Spend ($)
                             <div class="info-tooltip ml-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                                <span class="tooltip-text">All costs to advertise your program. Ex: Social media ads, influencers, and in-store POS (Point of Sale) materials like blades, bunker headers, arch, stickers, or danglers.</span>
+                                <span class="tooltip-text">All costs to advertise your program. Ex: Social media ads, influencers, and in-store POS materials.</span>
                             </div>
                         </label>
                         <input type="number" id="mediaSpend" value="5000" class="w-full bg-[#202221] border border-gray-700 rounded-lg p-3 text-white focus:ring-2 focus:ring-[#EDA400] focus:outline-none" placeholder="e.g., 5000">
@@ -70,30 +69,26 @@ document.addEventListener("DOMContentLoaded", function() {
                             Total Cost of Prizes & Fulfillment ($)
                             <div class="info-tooltip ml-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                                <span class="tooltip-text">The total cash value of all prizes (grand prizes and instant wins) plus any shipping or support costs.</span>
+                                <span class="tooltip-text">The total cash value of all prizes plus any shipping costs.</span>
                             </div>
                         </label>
                         <input type="number" id="prizeCosts" value="10000" class="w-full bg-[#202221] border border-gray-700 rounded-lg p-3 text-white focus:ring-2 focus:ring-[#EDA400] focus:outline-none" placeholder="e.g., 10000">
                         <div id="prizeCostsError" class="text-red-400 text-sm mt-1 hidden">Please enter a value greater than 0.</div>
                     </div>
                 </div>
-
-                <button onclick="goToStep2()" class="w-full bg-[#EDA400] text-gray-900 font-bold py-3 px-6 rounded-lg mt-8 hover:bg-[#d59200] transition duration-300 active:scale-[0.98] active:brightness-95">
-                    Next: Enter Your Results &rarr;
-                </button>
+                <button onclick="goToStep2()" class="w-full bg-[#EDA400] text-gray-900 font-bold py-3 px-6 rounded-lg mt-8 hover:bg-[#d59200] transition duration-300 active:scale-[0.98] active:brightness-95">Next: Enter Your Results &rarr;</button>
             </div>
 
             <div id="step2" class="step-transition opacity-0 hidden">
                 <h3 class="text-2xl font-bold text-white mb-2">Step 2: Your Program Performance</h3>
                 <p class="text-gray-400 mb-6">Enter the results you are currently tracking.</p>
-                
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label for="participants" class="block text-sm font-medium text-gray-300 mb-1">
                             Total Valid Receipts (Participants)
                             <div class="info-tooltip ml-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                                <span class="tooltip-text">The number of unique, approved receipts uploaded by your customers.</span>
+                                <span class="tooltip-text">The number of unique, approved receipts uploaded.</span>
                             </div>
                         </label>
                         <input type="number" id="participants" value="5000" class="w-full bg-[#202221] border border-gray-700 rounded-lg p-3 text-white focus:ring-2 focus:ring-[#EDA400] focus:outline-none" placeholder="e.g., 5000">
@@ -104,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             Total Emails Collected (Leads)
                             <div class="info-tooltip ml-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                                <span class="tooltip-text">The number of unique emails or contacts you collected from participants.</span>
+                                <span class="tooltip-text">The number of unique emails collected.</span>
                             </div>
                         </label>
                         <input type="number" id="leads" value="5000" class="w-full bg-[#202221] border border-gray-700 rounded-lg p-3 text-white focus:ring-2 focus:ring-[#EDA400] focus:outline-none" placeholder="e.g., 5000">
@@ -115,7 +110,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             Price per Unit of Your Product ($)
                             <div class="info-tooltip ml-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                                <span class="tooltip-text">The price of a single unit of your product (e.g., $5).</span>
+                                <span class="tooltip-text">The price of a single unit (e.g., $5).</span>
                             </div>
                         </label>
                         <input type="number" id="productPrice" value="5" class="w-full bg-[#202221] border border-gray-700 rounded-lg p-3 text-white focus:ring-2 focus:ring-[#EDA400] focus:outline-none" placeholder="e.g., 5">
@@ -126,583 +121,14 @@ document.addEventListener("DOMContentLoaded", function() {
                             Average Units of Your Product per Receipt
                             <div class="info-tooltip ml-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                                <span class="tooltip-text">A standard 'Buy 1' program = 1. If you don't track this, enter 1. This is your baseline.</span>
+                                <span class="tooltip-text">A standard 'Buy 1' program = 1.</span>
                             </div>
                         </label>
                         <input type="number" id="avgUnits" value="1" class="w-full bg-[#202221] border border-gray-700 rounded-lg p-3 text-white focus:ring-2 focus:ring-[#EDA400] focus:outline-none" placeholder="e.g., 1">
                         <div id="avgUnitsError" class="text-red-400 text-sm mt-1 hidden">Please enter a value greater than 0.</div>
                     </div>
-                    
                     <div class="md:col-span-2">
                         <label for="targetAvgUnits" class="block text-sm font-medium text-gray-300 mb-1">
                             Target Units per Receipt (with Gamification)
                             <div class="info-tooltip ml-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                                <span class="tooltip-text">This is your goal. A 'Buy 2, get 3 entries' program aims for 2. We will use this to calculate your 'Full-Stack' potential.</span>
-                            </div>
-                        </label>
-                        <input type="number" id="targetAvgUnits" value="1.5" class="w-full bg-[#202221] border border-gray-700 rounded-lg p-3 text-white focus:ring-2 focus:ring-[#EDA400] focus:outline-none" placeholder="e.g., 1.5">
-                        <div id="targetAvgUnitsError" class="text-red-400 text-sm mt-1 hidden">Target units must be greater than average units.</div>
-                    </div>
-                </div>
-
-                <div class="flex justify-between mt-8">
-                    <button onclick="goToStep1()" class="bg-gray-700 text-white font-bold py-3 px-6 rounded-lg hover:bg-gray-600 transition duration-300 active:scale-[0.98] active:brightness-95">
-                        &larr; Back
-                    </button>
-                    <button onclick="goToStepEmail()" class="bg-[#EDA400] text-gray-900 font-bold py-3 px-6 rounded-lg hover:bg-[#d59200] transition duration-300 active:scale-[0.98] active:brightness-95">
-                        Calculate My ROI & See My Data Leaks &rarr;
-                    </button>
-                </div>
-            </div>
-
-            <div id="stepEmail" class="step-transition opacity-0 hidden">
-                <div class="text-center">
-                    <svg class="mx-auto h-12 w-12 text-[#EDA400]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                    </svg>
-                    <h3 class="text-2xl font-bold text-white mt-4 mb-2">Your Analysis is Ready to be Unlocked</h3>
-                    <p class="text-gray-400 mb-6">Enter your email to receive your personalized ROI analysis and see the <strong class="font-bold">2 critical value sources</strong> your program is missing.</p>
-                    
-                    <div class="space-y-4">
-                        <input type="email" id="userEmail" class="w-full bg-[#202221] border border-gray-700 rounded-lg p-3 text-white focus:ring-2 focus:ring-[#EDA400] focus:outline-none" placeholder="you@company.com">
-                        <div id="emailError" class="text-red-400 text-sm text-left hidden">Please enter a valid email address.</div>
-                    </div>
-
-                    <button id="unlockButton" onclick="showResults()" class="w-full bg-[#EDA400] text-gray-900 font-bold py-3 px-6 rounded-lg mt-6 hover:bg-[#d59200] transition duration-300 active:scale-[0.98] active:brightness-95 disabled:opacity-50">
-                        Unlock My Results Now &rarr;
-                    </button>
-                    <button onclick="goToStep2()" class="text-gray-400 text-sm mt-4 hover:text-white transition active:scale-[0.98] active:brightness-95">
-                        &larr; Go Back
-                    </button>
-                </div>
-            </div>
-
-            <div id="stepResult" class="step-transition opacity-0 hidden">
-                <h3 class="text-3xl font-bold text-white mb-6 text-center">Your <strong class="font-bold">Buy, Scan, Win</strong> ROI Analysis</h3>
-                
-                <div class="bar-chart-container mb-6">
-                    <h4 class="text-lg font-bold text-white mb-4 text-center">Visualizing Your Return (ROI)</h4>
-                    <p class="text-xs text-gray-400 text-center mb-6 -mt-2">How much value you generated for every $1 spent.</p>
-                    
-                    <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 mb-4 text-xs text-gray-400">
-                        <div class="flex items-center"><span class="h-3 w-3 rounded-full bg-red-400 mr-2"></span>Loss (Below Breakeven)</div>
-                        <div class="flex items-center"><span class="h-3 w-3 rounded-full bg-gray-300 mr-2"></span>Baseline Revenue</div>
-                        <div class="flex items-center"><span class="h-3 w-3 rounded-full bg-[#fde68a] mr-2"></span>Sales Uplift</div>
-                        <div class="flex items-center"><span class="h-3 w-3 rounded-full bg-[#EDA400] mr-2"></span>1st-Party Data Value</div>
-                    </div>
-
-                    <div class="bar-row">
-                        <div class="bar-label">
-                            <div>
-                                <span class="text-gray-300"><strong class="font-bold">Standard</strong> Program ROI</span>
-                                <span class="value ml-2" id="standard-bar-value"></span>
-                            </div>
-                            <span class="percent" id="standard-bar-percent"></span>
-                        </div>
-                        <div class="bar-wrapper" id="standard-bar-wrapper">
-                            <div id="bar-standard" class="bar-segment rounded-md"></div>
-                        </div>
-                    </div>
-
-                    <div class="bar-row">
-                        <div class="bar-label">
-                            <div>
-                                <span class="text-white"><strong class="font-bold">Full-Stack</strong> ROI</span>
-                                <span class="value ml-2" id="fullstack-bar-value"></span>
-                            </div>
-                            <span class="percent" id="fullstack-bar-percent"></span>
-                        </div>
-                        <div class="bar-wrapper" id="fullstack-bar-wrapper">
-                            <div id="bar-fs-baseline" class="bar-segment bg-gray-300 rounded-l-md"></div>
-                            <div id="bar-fs-uplift" class="bar-segment bg-[#fde68a]"></div>
-                            <div id="bar-fs-data" class="bar-segment bg-[#EDA400] rounded-r-md"></div>
-                        </div>
-                        <div class="bar-segment-labels" id="fullstack-label-wrapper">
-                            <div id="label-fs-baseline" class="segment-label">Baseline</div>
-                            <div id="label-fs-uplift" class="segment-label">Uplift</div>
-                            <div id="label-fs-data" class="segment-label">Data</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    
-                    <div class="bg-[#202221] p-6 rounded-lg border border-gray-700">
-                        <h4 class="text-xl font-bold text-white mb-4"><strong class="font-bold">Standard</strong> Program ROI (The <strong class="font-bold">Cost Center</strong>)</h4>
-                        
-                        <div class="space-y-2 text-sm">
-                            <div class="flex justify-between">
-                                <span class="text-gray-400">Total Participants:</span>
-                                <span class="text-white font-medium" id="tradParticipants"></span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-gray-400">Avg. Units per Receipt:</span>
-                                <span class="text-white font-medium" id="tradAvgUnits"></span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-gray-400">Baseline Revenue:</span>
-                                <span class="text-white font-medium" id="tradRevenue"></span>
-                            </div>
-                            <div class="flex justify-between font-bold opacity-0" aria-hidden="true">
-                                <span class="text-gray-300">Total Generated Value:</span>
-                                <span class="text-white">&nbsp;</span>
-                            </div>
-                        </div>
-
-                        <hr class="border-gray-700 my-4">
-
-                        <div class="text-center">
-                            <span class="text-sm text-gray-400">Baseline ROI</span>
-                            <h2 class="text-4xl font-extrabold text-red-400 my-2" id="tradROI"></h2>
-                            <span class="text-sm text-gray-400" id="tradROI_subtitle"></span>
-                        </div>
-                        
-                        <div class="mt-4 pt-4 border-t border-gray-700">
-                            <h5 class="font-bold text-white mb-2">Our Analysis: The <strong class="font-bold">Standard</strong> View</h5>
-                            <p class="text-xs text-gray-300">
-                                This is the traditional way to see a <strong class="font-bold">Buy, Scan, Win</strong> program.
-                                <br><br>
-                                Your investment of <strong id="didactic_investment_1" class="text-[#EDA400]"></strong> only brought in <strong id="didactic_revenue_1" class="text-[#EDA400]"></strong> in sales (based on <strong id="didactic_avg_units_1" class="text-[#EDA400]"></strong> units per receipt). This looks like a <strong class="text-red-400">net loss</strong>.
-                                <br><br>
-                                This view is incomplete. It misses two key sources of value:
-                                <br>1. The <strong class="font-bold">potential</strong> to sell more units per receipt.
-                                <br>2. The <strong class="font-bold">future value</strong> of the customer data you collected.
-                            </p>
-                        </div>
-
-                    </div>
-
-                    <div class="bg-[#202221] p-6 rounded-lg border-2 border-[#EDA400] shadow-lg">
-                        <h4 class="text-xl font-bold text-[#EDA400] mb-4">Threesixkey <strong class="font-bold">Full-Stack</strong> ROI (The <strong class="font-bold">Revenue System</strong>)</h4>
-                        
-                         <div class="space-y-2 text-sm">
-                            <div class="flex justify-between">
-                                <span class="text-gray-400">Target Avg. Units/Receipt:</span>
-                                <span class="text-white font-medium" id="phyTargetAvgUnits"></span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-gray-400">Total Program Revenue¹:</span>
-                                <span class="text-white font-medium" id="phyRevenue"></span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-gray-400">+ 1st-Party Data Value²:</span>
-                                <span class="text-white font-medium" id="phyDataValue"></span>
-                            </div>
-                            <div class="flex justify-between font-bold">
-                                <span class="text-gray-300">Total Generated Value:</span>
-                                <span class="text-white" id="phyTotalValue"></span>
-                            </div>
-                        </div>
-
-                        <hr class="border-gray-700 my-4">
-
-                        <div class="text-center">
-                            <span class="text-sm text-[#EDA400]"><strong class="font-bold">Full-Stack</strong> ROI</span>
-                            <h2 class="text-4xl font-extrabold text-[#EDA400] my-2" id="phyROI"></h2>
-                            <span class="text-sm text-[#EDA400]" id="phyROI_subtitle"></span>
-                        </div>
-                        
-                        <div class="mt-4 pt-4 border-t border-gray-700">
-                            <h5 class="font-bold text-white mb-2">Our Analysis: The <strong class="font-bold">Full-Stack</strong> View</h5>
-                            <p class="text-xs text-gray-300">
-                                Here is how we find the hidden profit in your program:
-                            </p>
-                            <ol class="list-decimal list-inside text-xs text-gray-300 space-y-2 mt-2">
-                                <li>
-                                    <strong>We Sell More Products (Uplift):</strong>
-                                    By setting a <strong class="font-bold">target</strong> of <strong id="didactic_target_units" class="text-[#EDA400]"></strong> units per receipt (vs. your baseline of <strong id="didactic_base_units" class="text-[#EDA400]"></strong>) using gamification, your program generates <strong id="didactic_uplift_revenue" class="text-[#EDA400]"></strong> in <strong class="font-bold">new</strong> product sales.
-                                </li>
-                                <li>
-                                    <strong>We Build a Data Asset:</strong>
-                                    You didn't just get <strong id="didactic_leads" class="text-[#EDA400]"></strong> emails, you got shopper profiles (what/when/where they buy). This data is an asset worth <strong id="didactic_data_value" class="text-[#EDA4D]"></strong> (at a conservative $10/lead).
-                                </li>
-                            </ol>
-                            <p class="text-sm text-white font-bold mt-4">
-                                Conclusion: Your <strong id="didactic_investment_2" class="text-[#EDA400]"></strong> investment was not a cost. It was a profitable system that generated <strong id="didactic_total_value" class="text-[#EDA400]"></strong> in total value.
-                            </p>
-                        </div>
-
-                    </div>
-                </div>
-                
-                <div class="text-center text-xs text-gray-500 mt-6">
-                    <p>¹ Total Program Revenue is calculated using your 'Target Units per Receipt' goal.</p>
-                    <p>² Based on a conservative $10 CPG industry value for a 1st-party lead with purchase history.</p>
-                </div>
-
-                <div class="mt-10 text-center bg-[#202221] p-6 rounded-lg">
-                    <h3 class="text-2xl font-bold text-white">Your <strong class="font-semibold text-3xl">Buy, Scan, Win</strong> program has hidden value.</h3>
-                    <p class="text-gray-300 mt-2 mb-6">You've already done the hard part. Let Threesixkey build the system that captures the <strong class="font-bold">full-basket data</strong> and turns your cost into a profit.</p>
-                    <a href="https://www.threesixkey.com/contact-us" target="_blank" rel="noopener noreferrer" class="inline-block bg-[#EDA400] text-gray-900 font-bold py-3 px-8 rounded-lg text-lg hover:bg-[#d59200] transition duration-300 active:scale-[0.98] active:brightness-95">
-                        Book a 15-Min Demo to Plug Your Data Leaks
-                    </a>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-    `;
-});
-
-
-// 2. Logic & Functions
-// --- State Management ---
-let calculatorData = {
-    totalInvestment: 0,
-    participants: 0,
-    leads: 0,
-    productPrice: 0,
-    avgUnits: 1,
-    targetAvgUnits: 1.5 
-};
-const BENCHMARK_LEAD_VALUE = 10;
-const steps = ['step1', 'step2', 'stepEmail', 'stepResult'];
-let currentStep = 'step1'; 
-
-// --- Validation Helpers ---
-function validateInput(inputId, errorId, validationFn, errorMessage) {
-    const input = document.getElementById(inputId);
-    const errorEl = document.getElementById(errorId);
-    const value = parseFloat(input.value);
-
-    if (validationFn(value)) {
-        input.classList.remove('input-error');
-        errorEl.classList.add('hidden');
-        return true;
-    } else {
-        input.classList.add('input-error');
-        errorEl.innerText = errorMessage;
-        errorEl.classList.remove('hidden');
-        return false;
-    }
-}
-
-function resetErrors(ids) {
-    ids.forEach(id => {
-        document.getElementById(id)?.classList.remove('input-error');
-        document.getElementById(id + 'Error')?.classList.add('hidden');
-    });
-}
-
-
-// --- Navigation Functions ---
-function showStep(stepId) {
-    if (stepId === currentStep) return;
-
-    const oldStepEl = document.getElementById(currentStep);
-    const newStepEl = document.getElementById(stepId);
-
-    if (oldStepEl) {
-        oldStepEl.classList.add('opacity-0');
-    }
-
-    setTimeout(() => {
-        if (oldStepEl) {
-            oldStepEl.classList.add('hidden');
-        }
-        
-        if (newStepEl) {
-            newStepEl.classList.remove('hidden');
-            setTimeout(() => {
-                newStepEl.classList.remove('opacity-0');
-                currentStep = stepId;
-                window.scrollTo(0, 0);
-            }, 10);
-        } else {
-            console.error('Active element not found:', stepId);
-        }
-    }, 300);
-}
-
-function goToStep1() {
-    showStep('step1');
-}
-
-function goToStep2() {
-    resetErrors(['techFees', 'mediaSpend', 'prizeCosts']);
-    
-    const isTechFeesValid = validateInput('techFees', 'techFeesError', val => val > 0, 'Please enter a value greater than 0.');
-    const isMediaSpendValid = validateInput('mediaSpend', 'mediaSpendError', val => val > 0, 'Please enter a value greater than 0.');
-    const isPrizeCostsValid = validateInput('prizeCosts', 'prizeCostsError', val => val > 0, 'Please enter a value greater than 0.');
-
-    if (!isTechFeesValid || !isMediaSpendValid || !isPrizeCostsValid) {
-        return;
-    }
-
-    const techFees = parseFloat(document.getElementById('techFees').value) || 0;
-    const mediaSpend = parseFloat(document.getElementById('mediaSpend').value) || 0;
-    const prizeCosts = parseFloat(document.getElementById('prizeCosts').value) || 0;
-    
-    calculatorData.totalInvestment = techFees + mediaSpend + prizeCosts;
-    showStep('step2');
-}
-
-function goToStepEmail() {
-    resetErrors(['participants', 'leads', 'productPrice', 'avgUnits', 'targetAvgUnits']);
-    
-    let isValid = true;
-    
-    isValid = validateInput('participants', 'participantsError', val => val > 0, 'Please enter a value greater than 0.') && isValid;
-    isValid = validateInput('productPrice', 'productPriceError', val => val > 0, 'Please enter a value greater than 0.') && isValid;
-    isValid = validateInput('avgUnits', 'avgUnitsError', val => val > 0, 'Please enter a value greater than 0.') && isValid;
-    
-    const avgUnits = parseFloat(document.getElementById('avgUnits').value) || 1;
-    const targetAvgUnits = parseFloat(document.getElementById('targetAvgUnits').value) || 1.5;
-    
-    isValid = validateInput('targetAvgUnits', 'targetAvgUnitsError', val => val > avgUnits, 'Target units must be greater than average units.') && isValid;
-    
-    const leadsInput = document.getElementById('leads');
-    const leadsError = document.getElementById('leadsError');
-    if (parseFloat(leadsInput.value) <= 0) {
-        leadsError.innerText = 'Leads will default to participants if 0.';
-        leadsError.classList.remove('hidden');
-    }
-
-    if (!isValid) {
-        return;
-    }
-
-    calculatorData.participants = parseFloat(document.getElementById('participants').value) || 0;
-    calculatorData.leads = parseFloat(document.getElementById('leads').value) || calculatorData.participants;
-    calculatorData.productPrice = parseFloat(document.getElementById('productPrice').value) || 0;
-    calculatorData.avgUnits = avgUnits;
-    calculatorData.targetAvgUnits = targetAvgUnits;
-
-    showStep('stepEmail');
-}
-
-// --- showResults() function with Webhook ---
-function showResults() {
-    const email = document.getElementById('userEmail').value;
-    const emailError = document.getElementById('emailError');
-    const unlockButton = document.getElementById('unlockButton');
-    const loadingOverlay = document.getElementById('loadingOverlay');
-    
-    if (!validateEmail(email)) {
-        emailError.classList.remove('hidden');
-        document.getElementById('userEmail').classList.add('input-error');
-        return;
-    }
-    emailError.classList.add('hidden');
-    document.getElementById('userEmail').classList.remove('input-error');
-
-    console.log('Lead captured:', email);
-
-    const webhookUrl = 'https://n8n.hatim.us/webhook/37dea748-679c-4871-ac9a-0108ffec901f';
-    const payload = { 
-        email: email
-    }; 
-
-    fetch(webhookUrl, {
-        method: 'POST',
-        mode: 'no-cors', 
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-    })
-    .then(response => {
-        if (!response.ok) {
-            console.error('Webhook submission failed with status:', response.statusText);
-        } else {
-            console.log('Lead successfully sent to webhook.');
-        }
-    })
-    .catch(error => {
-        console.error('Error sending data to webhook:', error);
-    });
-
-
-    // UI Logic
-    unlockButton.disabled = true;
-    loadingOverlay.classList.remove('hidden');
-    setTimeout(() => loadingOverlay.classList.remove('opacity-0'), 10);
-
-    setTimeout(() => {
-        resetChart();
-        const results = calculateAndDisplayROI();
-        showStep('stepResult');
-
-        loadingOverlay.classList.add('opacity-0');
-        setTimeout(() => {
-            loadingOverlay.classList.add('hidden');
-            unlockButton.disabled = false;
-        }, 300);
-
-        setTimeout(() => {
-            animateChart(results);
-        }, 400);
-
-    }, 3000);
-}
-
-function resetChart() {
-    const barStandard = document.getElementById('bar-standard');
-    const barFsBaseline = document.getElementById('bar-fs-baseline');
-    const barFsUplift = document.getElementById('bar-fs-uplift');
-    const barFsData = document.getElementById('bar-fs-data');
-    const labelFsBaseline = document.getElementById('label-fs-baseline');
-    const labelFsUplift = document.getElementById('label-fs-uplift');
-    const labelFsData = document.getElementById('label-fs-data');
-
-    if (barStandard && barFsBaseline && barFsUplift && barFsData && labelFsBaseline && labelFsUplift && labelFsData) {
-        barStandard.style.width = '0%';
-        barFsBaseline.style.width = '0%';
-        barFsUplift.style.width = '0%';
-        barFsData.style.width = '0%';
-        labelFsBaseline.style.width = '0%';
-        labelFsUplift.style.width = '0%';
-        labelFsData.style.width = '0%';
-        barStandard.classList.remove('bg-red-400', 'bg-gray-500');
-    }
-    document.getElementById('standard-bar-wrapper').querySelector('.breakeven-line')?.remove();
-    document.getElementById('standard-bar-wrapper').querySelector('.breakeven-label')?.remove();
-    document.getElementById('fullstack-bar-wrapper').querySelector('.breakeven-line')?.remove();
-    document.getElementById('fullstack-bar-wrapper').querySelector('.breakeven-label')?.remove();
-}
-
-// --- Helper Functions ---
-function validateEmail(email) {
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\[0-9]{1,3}\[0-9]{1,3}\[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
-}
-function formatCurrency(value) {
-    return value.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
-}
-function formatPercent(value) {
-    return `${value.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })}`;
-}
-function formatBarPercent(value) {
-    if (!isFinite(value)) value = 0;
-    return `${value.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
-}
-function formatPerDollar(value) {
-    if (!isFinite(value) || value <= 0) return "Generated $0.00 per $1 spent";
-    return `Generated ${value.toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 })} per $1 spent`;
-}
-function formatNumber(value) {
-    return Math.round(value).toLocaleString('en-US');
-}
-function formatUnits(value) {
-     return value.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
-}
-
-// --- Chart Animation ---
-function animateChart(results) {
-    const { baselineROAS, fullStackROAS, baselineRevenue, upliftRevenue, totalDataValue } = results;
-    const maxChartROAS = Math.max(1.1, fullStackROAS);
-    const standardWidthPercent = (baselineROAS / maxChartROAS) * 100;
-    
-    const baselineROAS_fs = baselineRevenue / calculatorData.totalInvestment;
-    const upliftROAS_fs = upliftRevenue / calculatorData.totalInvestment;
-    const dataROAS_fs = totalDataValue / calculatorData.totalInvestment;
-
-    const fsBaselineWidthPercent = (baselineROAS_fs / maxChartROAS) * 100;
-    const fsUpliftWidthPercent = (upliftROAS_fs / maxChartROAS) * 100;
-    const fsDataWidthPercent = (dataROAS_fs / maxChartROAS) * 100;
-
-    const breakevenLinePercent = (1 / maxChartROAS) * 100;
-
-    const barStandard = document.getElementById('bar-standard');
-    const barFsBaseline = document.getElementById('bar-fs-baseline');
-    const barFsUplift = document.getElementById('bar-fs-uplift');
-    const barFsData = document.getElementById('bar-fs-data');
-    const labelFsBaseline = document.getElementById('label-fs-baseline');
-    const labelFsUplift = document.getElementById('label-fs-uplift');
-    const labelFsData = document.getElementById('label-fs-data');
-    const standardBarWrapper = document.getElementById('standard-bar-wrapper');
-    const fullstackBarWrapper = document.getElementById('fullstack-bar-wrapper');
-    const standardBarValue = document.getElementById('standard-bar-value');
-    const fullstackBarValue = document.getElementById('fullstack-bar-value');
-    const standardBarPercentEl = document.getElementById('standard-bar-percent');
-    const fullstackBarPercentEl = document.getElementById('fullstack-bar-percent');
-
-    [standardBarWrapper, fullstackBarWrapper].forEach(wrapper => {
-        const line = document.createElement('div');
-        line.className = 'breakeven-line';
-        line.style.left = breakevenLinePercent + '%';
-        wrapper.appendChild(line);
-
-        const label = document.createElement('div');
-        label.className = 'breakeven-label';
-        label.style.left = breakevenLinePercent + '%';
-        label.innerText = 'Breakeven';
-        wrapper.appendChild(label);
-    });
-
-    standardBarValue.innerText = formatPerDollar(baselineROAS);
-    fullstackBarValue.innerText = formatPerDollar(fullStackROAS);
-    standardBarPercentEl.innerText = formatBarPercent(baselineROAS);
-    fullstackBarPercentEl.innerText = formatBarPercent(fullStackROAS);
-
-    if (baselineROAS < 1) {
-        barStandard.classList.add('bg-red-400');
-    } else {
-        barStandard.classList.add('bg-gray-500');
-    }
-
-    setTimeout(() => { if (barStandard) barStandard.style.width = standardWidthPercent + '%'; }, 100);
-    setTimeout(() => { 
-        if (barFsBaseline) barFsBaseline.style.width = fsBaselineWidthPercent + '%';
-        if (labelFsBaseline) labelFsBaseline.style.width = fsBaselineWidthPercent + '%';
-    }, 900);
-    setTimeout(() => { 
-        if (barFsUplift) barFsUplift.style.width = fsUpliftWidthPercent + '%';
-        if (labelFsUplift) labelFsUplift.style.width = fsUpliftWidthPercent + '%';
-    }, 1700);
-    setTimeout(() => { 
-        if (barFsData) barFsData.style.width = fsDataWidthPercent + '%';
-        if (labelFsData) labelFsData.style.width = fsDataWidthPercent + '%';
-    }, 2500);
-}
-
-function calculateAndDisplayROI() {
-    const { totalInvestment, participants, leads, productPrice, avgUnits, targetAvgUnits } = calculatorData;
-
-    const baselineRevenue = participants * avgUnits * productPrice;
-    const baselineROI = (baselineRevenue - totalInvestment) / totalInvestment;
-    const baselineROAS = baselineRevenue / totalInvestment;
-
-    const totalProductRevenue = participants * targetAvgUnits * productPrice; 
-    const upliftRevenue = totalProductRevenue - baselineRevenue;
-    const totalDataValue = leads * BENCHMARK_LEAD_VALUE;
-    const totalValue = totalProductRevenue + totalDataValue;
-    const fullStackROI = (totalValue - totalInvestment) / totalInvestment;
-    const fullStackROAS = totalValue / totalInvestment;
-
-    document.getElementById('tradParticipants').innerText = formatNumber(participants);
-    document.getElementById('tradAvgUnits').innerText = formatUnits(avgUnits);
-    document.getElementById('tradRevenue').innerText = formatCurrency(baselineRevenue);
-    document.getElementById('tradROI').innerText = (isFinite(baselineROI) ? formatPercent(baselineROI) : 'N/A');
-    document.getElementById('tradROI_subtitle').innerText = formatPerDollar(baselineROAS);
-
-    document.getElementById('phyTargetAvgUnits').innerText = formatUnits(targetAvgUnits);
-    document.getElementById('phyRevenue').innerText = formatCurrency(totalProductRevenue);
-    document.getElementById('phyDataValue').innerText = formatCurrency(totalDataValue);
-    document.getElementById('phyTotalValue').innerText = formatCurrency(totalValue);
-    document.getElementById('phyROI').innerText = (isFinite(fullStackROI) ? formatPercent(fullStackROI) : 'N/A');
-    document.getElementById('phyROI_subtitle').innerText = formatPerDollar(fullStackROAS);
-    
-    document.getElementById('didactic_investment_1').innerText = formatCurrency(totalInvestment);
-    document.getElementById('didactic_revenue_1').innerText = formatCurrency(baselineRevenue);
-    document.getElementById('didactic_avg_units_1').innerText = formatUnits(avgUnits);
-    document.getElementById('didactic_target_units').innerText = formatUnits(targetAvgUnits);
-    document.getElementById('didactic_base_units').innerText = formatUnits(avgUnits);
-    document.getElementById('didactic_uplift_revenue').innerText = formatCurrency(upliftRevenue);
-    document.getElementById('didactic_leads').innerText = formatNumber(leads);
-    document.getElementById('didactic_data_value').innerText = formatCurrency(totalDataValue);
-    document.getElementById('didactic_investment_2').innerText = formatCurrency(totalInvestment);
-    document.getElementById('didactic_total_value').innerText = formatCurrency(totalValue);
-    
-    return {
-        baselineRevenue,
-        totalValue,
-        baselineROI,
-        upliftRevenue,
-        totalDataValue,
-        baselineROAS,
-        fullStackROAS
-    };
-}
+                                <svg xmlns="http://www.w3
