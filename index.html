@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROI Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #000; color: #e5e7eb; overflow-x: hidden; }
+        
+        /* --- BULLETPROOF GRAPH STYLES --- */
+        /* These verify the graph appears even if Tailwind fails */
+        .bar-loss { background-color: #F87171 !important; } /* Red */
+        .bar-gray { background-color: #6B7280 !important; } /* Gray */
+        .bar-baseline { background-color: #D1D5DB !important; } /* Light Gray */
+        .bar-uplift { background-color: #FDE68A !important; } /* Pale Yellow */
+        .bar-data { background-color: #EDA400 !important; } /* Gold */
+        
+        .bar-segment { height: 100%; transition: width 1s ease-out; width: 0%; }
+        .bar-wrapper { background-color: #101211; height: 2rem; display: flex; position: relative; width: 100%; border-radius: 6px; overflow: hidden; }
+        
+        .breakeven-line { position: absolute; top: -4px; bottom: -4px; width: 2px; background-color: #EDA400; z-index: 10; opacity: 0.8; }
+        .breakeven-label { position: absolute; top: -20px; transform: translateX(-50%); font-size: 10px; color: #EDA400; font-weight: 700; }
+
+        /* Tooltip */
+        .info-tooltip { position: relative; display: inline-block; cursor: help; }
+        .info-tooltip .tooltip-text { visibility: hidden; width: 240px; background-color: #202221; color: #fff; text-align: center; border-radius: 6px; padding: 8px; position: absolute; z-index: 20; bottom: 125%; left: 50%; margin-left: -120px; opacity: 0; transition: opacity 0.3s; font-size: 12px; border: 1px solid #374151; pointer-events: none; }
+        .info-tooltip:hover .tooltip-text { visibility: visible; opacity: 1; }
+
+        /* Transitions */
+        .step-section { transition: opacity 0.3s ease-in-out; }
+        .hidden-step { display: none; opacity: 0; }
+        .visible-step { display: block; opacity: 1; }
+        
+        /* Loader */
+        .loader { border: 4px solid #374151; border-top: 4px solid #EDA400; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        .input-error { border-color: #F87171 !important; }
+    </style>
+</head>
+<body class="p-4 flex justify-center">
+
+    <div id="loadingOverlay" class="fixed inset-0 bg-black bg-opacity-80 flex flex-col items-center justify-center z-50 hidden">
+        <div class="loader"></div>
+        <p class="text-white mt-4">Calculating results...</p>
+    </div>
+
+    <div class="w-full max-w-5xl">
+        <div class="text-center mb-8">
+            <img src="https://cdn.prod.website-files.com/68cc5af3d01de0e204120944/68d407d3bf013b181b7bd083_36k-logo-whte-yllw.avif" alt="Threesixkey Logo" class="mx-auto h-12 w-auto mb-4">
+            <h2 class="text-3xl font-bold text-white"><span class="text-[#EDA400]">Buy, Scan, Win</span> ROI Calculator</h2>
+        </div>
+
+        <div class="bg-[#101211] p-6 sm:p-10 rounded-xl border border-gray-800 shadow-2xl">
+            
+            <div id="step1" class="step-section visible-step">
+                <div class="mb-6 p-4 bg-[#202221] rounded-lg border border-gray-700">
+                    <h4 class="font-bold text-[#EDA400] mb-1">What is this tool?</h4>
+                    <p class="text-sm text-gray-400">Compare your current "Cost Center" campaigns against a "Revenue Generating" Full-Stack system.</p>
+                </div>
+                
+                <h3 class="text-xl font-bold text-white mb-4">Step 1: Program Investment</h3>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm text-gray-400 mb-1">Strategy, Creative & Tech Build ($)</label>
+                        <input type="number" id="techFees" value="15000" class="w-full bg-[#202221] border border-gray-700 rounded p-3 text-white focus:border-[#EDA400] outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-400 mb-1">Media & Acquisition Spend ($)</label>
+                        <input type="number" id="mediaSpend" value="5000" class="w-full bg-[#202221] border border-gray-700 rounded p-3 text-white focus:border-[#EDA400] outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-400 mb-1">Prize Pool & Fulfillment ($)</label>
+                        <input type="number" id="prizeCosts" value="10000" class="w-full bg-[#202221] border border-gray-700 rounded p-3 text-white focus:border-[#EDA400] outline-none">
+                    </div>
+                    <p id="step1Error" class="text-red-400 text-sm hidden">Please enter valid amounts > 0.</p>
+                </div>
+                <button onclick="goToStep('step2')" class="w-full bg-[#EDA400] text-black font-bold py-3 rounded mt-6 hover:bg-[#d59200]">Next: Enter Results &rarr;</button>
+            </div>
+
+            <div id="step2" class="step-section hidden-step">
+                <h3 class="text-xl font-bold text-white mb-4">Step 2: Performance Metrics</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm text-gray-400 mb-1">Total Participants</label>
+                        <input type="number" id="participants" value="5000" class="w-full bg-[#202221] border border-gray-700 rounded p-3 text-white focus:border-[#EDA400] outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-400 mb-1">Leads Collected (Emails)</label>
+                        <input type="number" id="leads" value="5000" class="w-full bg-[#202221] border border-gray-700 rounded p-3 text-white focus:border-[#EDA400] outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-400 mb-1">Product Unit Price ($)</label>
+                        <input type="number" id="productPrice" value="5" class="w-full bg-[#202221] border border-gray-700 rounded p-3 text-white focus:border-[#EDA400] outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-400 mb-1">Avg. Units per Receipt</label>
+                        <input type="number" id="avgUnits" value="1" class="w-full bg-[#202221] border border-gray-700 rounded p-3 text-white focus:border-[#EDA400] outline-none">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm text-gray-400 mb-1">Target Units per Receipt (Gamified)</label>
+                        <input type="number" id="targetAvgUnits" value="1.5" class="w-full bg-[#202221] border border-gray-700 rounded p-3 text-white focus:border-[#EDA400] outline-none">
+                    </div>
+                    <p id="step2Error" class="text-red-400 text-sm hidden md:col-span-2">Please check your inputs.</p>
+                </div>
+                <div class="flex gap-4 mt-6">
+                    <button onclick="goToStep('step1')" class="w-1/3 bg-gray-700 text-white font-bold py-3 rounded hover:bg-gray-600">&larr; Back</button>
+                    <button onclick="goToStep('stepEmail')" class="w-2/3 bg-[#EDA400] text-black font-bold py-3 rounded hover:bg-[#d59200]">Calculate ROI &rarr;</button>
+                </div>
+            </div>
+
+            <div id="stepEmail" class="step-section hidden-step">
+                <div class="text-center py-8">
+                    <h3 class="text-2xl font-bold text-white mb-2">Unlock Your Analysis</h3>
+                    <p class="text-gray-400 mb-6">Enter your email to see the 2 critical value sources you are missing.</p>
+                    <input type="email" id="userEmail" placeholder="you@company.com" class="w-full max-w-md bg-[#202221] border border-gray-700 rounded p-3 text-white focus:border-[#EDA400] outline-none mx-auto block">
+                    <p id="emailError" class="text-red-400 text-sm hidden mt-2">Please enter a valid email.</p>
+                    
+                    <button id="unlockBtn" onclick="submitAndCalc()" class="w-full max-w-md bg-[#EDA400] text-black font-bold py-3 rounded mt-4 hover:bg-[#d59200]">Unlock Results &rarr;</button>
+                    <button onclick="goToStep('step2')" class="block mx-auto mt-4 text-sm text-gray-500 hover:text-white">Go Back</button>
+                </div>
+            </div>
+
+            <div id="stepResult" class="step-section hidden-step">
+                <h3 class="text-3xl font-bold text-white text-center mb-8">Your ROI Analysis</h3>
+
+                <div class="flex flex-wrap justify-center gap-4 mb-4 text-xs text-gray-400">
+                    <div class="flex items-center"><span class="w-3 h-3 rounded-full bar-loss mr-2"></span>Loss</div>
+                    <div class="flex items-center"><span class="w-3 h-3 rounded-full bar-baseline mr-2"></span>Baseline</div>
+                    <div class="flex items-center"><span class="w-3 h-3 rounded-full bar-uplift mr-2"></span>Uplift</div>
+                    <div class="flex items-center"><span class="w-3 h-3 rounded-full bar-data mr-2"></span>Data Value</div>
+                </div>
+
+                <div class="space-y-8 mb-10">
+                    <div>
+                        <div class="flex justify-between text-sm mb-1">
+                            <span class="text-gray-400">Standard Program ROI</span>
+                            <span id="disp-trad-per-dollar" class="text-gray-400"></span>
+                            <span id="disp-trad-roi" class="font-bold text-white text-lg"></span>
+                        </div>
+                        <div class="bar-wrapper" id="wrapper-trad">
+                            <div id="bar-trad" class="bar-segment bar-gray"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-sm mb-1">
+                            <span class="text-[#EDA400] font-bold">Full-Stack ROI</span>
+                            <span id="disp-fs-per-dollar" class="text-[#EDA400]"></span>
+                            <span id="disp-fs-roi" class="font-bold text-[#EDA400] text-lg"></span>
+                        </div>
+                        <div class="bar-wrapper" id="wrapper-fs">
+                            <div id="bar-fs-base" class="bar-segment bar-baseline"></div>
+                            <div id="bar-fs-uplift" class="bar-segment bar-uplift"></div>
+                            <div id="bar-fs-data" class="bar-segment bar-data"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-[#202221] p-6 rounded border border-gray-800">
+                        <h4 class="text-white font-bold text-lg mb-2">The Standard View</h4>
+                        <p class="text-sm text-gray-400">You spent <span id="out-inv-1" class="text-white"></span> to generate <span id="out-rev-1" class="text-white"></span> in sales. This is a Cost Center model.</p>
+                        <div class="mt-4 pt-4 border-t border-gray-800">
+                            <div class="flex justify-between text-sm mb-1"><span class="text-gray-500">Baseline ROI</span><span id="out-roi-1" class="text-red-400 font-bold"></span></div>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#202221] p-6 rounded border-2 border-[#EDA400]">
+                        <h4 class="text-[#EDA400] font-bold text-lg mb-2">The Full-Stack View</h4>
+                        <p class="text-sm text-gray-400">Gamification drove <span id="out-uplift" class="text-white"></span> in new sales, and you captured a data asset worth <span id="out-data" class="text-white"></span>.</p>
+                        <div class="mt-4 pt-4 border-t border-gray-800">
+                            <div class="flex justify-between text-sm mb-1"><span class="text-gray-500">Total Value</span><span id="out-total" class="text-white font-bold"></span></div>
+                            <div class="flex justify-between text-sm"><span class="text-[#EDA400]">Real ROI</span><span id="out-roi-2" class="text-[#EDA400] font-bold"></span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-10 text-center">
+                    <a href="https://www.threesixkey.com/contact-us" target="_top" class="inline-block bg-[#EDA400] text-black font-bold py-3 px-8 rounded hover:bg-[#d59200] transition">Book a 15-Min Demo to Plug Your Data Leaks</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DATA
+        let inputs = { tech:0, media:0, prize:0, parts:0, leads:0, price:0, avg:0, target:0 };
+        
+        function getVal(id) { return parseFloat(document.getElementById(id).value) || 0; }
+        function setTxt(id, txt) { if(document.getElementById(id)) document.getElementById(id).innerText = txt; }
+        function fmt$(n) { return n.toLocaleString('en-US', {style:'currency', currency:'USD', maximumFractionDigits:0}); }
+        function fmtP(n) { return n.toLocaleString('en-US', {style:'percent', maximumFractionDigits:0}); }
+
+        function goToStep(id) {
+            // Simple validation
+            if(id === 'step2') {
+                if(getVal('techFees')<=0 || getVal('mediaSpend')<=0) { document.getElementById('step1Error').classList.remove('hidden'); return; }
+                document.getElementById('step1Error').classList.add('hidden');
+            }
+            if(id === 'stepEmail') {
+                if(getVal('participants')<=0 || getVal('productPrice')<=0) { document.getElementById('step2Error').classList.remove('hidden'); return; }
+                document.getElementById('step2Error').classList.add('hidden');
+            }
+
+            document.querySelectorAll('.step-section').forEach(el => {
+                el.classList.remove('visible-step');
+                el.classList.add('hidden-step');
+            });
+            const target = document.getElementById(id);
+            target.classList.remove('hidden-step');
+            target.classList.add('visible-step');
+            
+            // Send height to parent (for iframe resizing)
+            setTimeout(() => {
+                const height = document.body.scrollHeight;
+                window.parent.postMessage({ type: 'resize', height: height }, '*');
+            }, 100);
+        }
+
+        function submitAndCalc() {
+            const email = document.getElementById('userEmail').value;
+            if(!email.includes('@') || !email.includes('.')) {
+                document.getElementById('emailError').classList.remove('hidden'); return;
+            }
+            document.getElementById('emailError').classList.add('hidden');
+
+            // Webhook (Fire and forget)
+            fetch('https://n8n.hatim.us/webhook/37dea748-679c-4871-ac9a-0108ffec901f', {
+                method: 'POST', mode: 'no-cors', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({email})
+            });
+
+            document.getElementById('loadingOverlay').classList.remove('hidden');
+            
+            setTimeout(() => {
+                calc();
+                document.getElementById('loadingOverlay').classList.add('hidden');
+                goToStep('stepResult');
+            }, 2000);
+        }
+
+        function calc() {
+            inputs.tech = getVal('techFees');
+            inputs.media = getVal('mediaSpend');
+            inputs.prize = getVal('prizeCosts');
+            inputs.parts = getVal('participants');
+            inputs.leads = getVal('leads') || inputs.parts;
+            inputs.price = getVal('productPrice');
+            inputs.avg = getVal('avgUnits');
+            inputs.target = getVal('targetAvgUnits');
+
+            const investment = inputs.tech + inputs.media + inputs.prize;
+            const baseRev = inputs.parts * inputs.avg * inputs.price;
+            const baseROI = (baseRev - investment) / investment;
+            const baseROAS = baseRev / investment;
+
+            const targetRev = inputs.parts * inputs.target * inputs.price;
+            const uplift = targetRev - baseRev;
+            const dataVal = inputs.leads * 10; // $10 per lead
+            const totalVal = targetRev + dataVal;
+            const fullROI = (totalVal - investment) / investment;
+            const fullROAS = totalVal / investment;
+
+            // Render Text
+            setTxt('disp-trad-roi', fmtP(baseROI));
+            setTxt('disp-trad-per-dollar', '$' + baseROAS.toFixed(2) + '/$1');
+            
+            setTxt('disp-fs-roi', fmtP(fullROI));
+            setTxt('disp-fs-per-dollar', '$' + fullROAS.toFixed(2) + '/$1');
+
+            setTxt('out-inv-1', fmt$(investment));
+            setTxt('out-rev-1', fmt$(baseRev));
+            setTxt('out-roi-1', fmtP(baseROI));
+
+            setTxt('out-uplift', fmt$(uplift));
+            setTxt('out-data', fmt$(dataVal));
+            setTxt('out-total', fmt$(totalVal));
+            setTxt('out-roi-2', fmtP(fullROI));
+
+            // Render Graph
+            const maxVal = Math.max(1.1, fullROAS);
+            const brk = (1 / maxVal) * 100;
+            
+            // Draw Breakeven Lines
+            ['wrapper-trad', 'wrapper-fs'].forEach(id => {
+                const w = document.getElementById(id);
+                // remove old lines
+                const old = w.querySelectorAll('.breakeven-line, .breakeven-label');
+                old.forEach(o => o.remove());
+                
+                const line = document.createElement('div'); line.className='breakeven-line'; line.style.left = brk+'%';
+                const lbl = document.createElement('div'); lbl.className='breakeven-label'; lbl.style.left = brk+'%'; lbl.innerText='Breakeven';
+                w.appendChild(line); w.appendChild(lbl);
+            });
+
+            // Animate Bars
+            const tradW = (baseROAS / maxVal) * 100;
+            const barTrad = document.getElementById('bar-trad');
+            barTrad.className = baseROAS < 1 ? 'bar-segment bar-loss' : 'bar-segment bar-gray';
+            setTimeout(() => barTrad.style.width = tradW + '%', 100);
+
+            const fsBaseW = ((baseRev/investment) / maxVal) * 100;
+            const fsUpliftW = ((uplift/investment) / maxVal) * 100;
+            const fsDataW = ((dataVal/investment) / maxVal) * 100;
+
+            setTimeout(() => document.getElementById('bar-fs-base').style.width = fsBaseW + '%', 500);
+            setTimeout(() => document.getElementById('bar-fs-uplift').style.width = fsUpliftW + '%', 1000);
+            setTimeout(() => document.getElementById('bar-fs-data').style.width = fsDataW + '%', 1500);
+        }
+    </script>
+</body>
+</html>
